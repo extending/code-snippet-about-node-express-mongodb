@@ -7,7 +7,9 @@
 
 - express
 
-- nodemon
+- express-generator 项目生成功能
+
+- nodemon ·restart nodejs server for any changes·
 
 ````
 restart node application

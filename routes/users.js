@@ -1,7 +1,34 @@
 var express = require('express');
 var router = express.Router();
 var URL = require('url');
+var MongoClient = require('mongodb').MongoClient,
+    DB_CONN_STR = 'mongodb://localhost:27017/test-db-0605'; // 数据库为 testDb
 var User = require('./user');
+
+var selectData = function(db, callback) {  
+  const mydb = db.db('DB_CONN_STR');
+  //连接到user表  
+  var collection = mydb.collection('user');
+  //查询数据
+  var whereStr = {"name":'xiaoming'};
+  // TODO:查询不到
+  collection.find(whereStr).toArray(function(err, result) {
+    if(err)
+    {
+      console.log('Error:'+ err);
+      return;
+    }     
+    callback(result);
+  });
+}
+
+MongoClient.connect(DB_CONN_STR, { useNewUrlParser: true }, function(err, db) {
+  console.log("连接成功！");
+  selectData(db, function(result) {
+    console.log(result);
+    db.close();
+  });
+});
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
