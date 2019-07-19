@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var URL = require('url');
 var MongoClient = require('mongodb').MongoClient,
-    DB_CONN_STR = 'mongodb://localhost:27017/test-db-0605'; // 数据库为 testDb
+    DB_CONN_STR = 'mongodb://localhost:27017/test-db-0605'; // 数据库为 test-db-0605
 var User = require('./user');
 
 var selectData = function(db, callback) {  
